@@ -1,0 +1,26 @@
+/**
+ * @param {Function} fn
+ * @return {Function}
+ */
+function memoize(fn) {
+    let map={}
+    return function(...args) {
+        const keyP = JSON.stringify(args);
+           if(keyP in map) return map[keyP]
+        const res = fn(...args)
+        map[keyP]=res
+        return res
+    }
+}
+
+
+/** 
+ * let callCount = 0;
+ * const memoizedFn = memoize(function (a, b) {
+ *	 callCount += 1;
+ *   return a + b;
+ * })
+ * memoizedFn(2, 3) // 5
+ * memoizedFn(2, 3) // 5
+ * console.log(callCount) // 1 
+ */
